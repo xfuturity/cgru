@@ -13,9 +13,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: install deps
+    - name: install dependencies
       working-directory: ./utilities
       run: sudo ./install_depends_devel.sh
     - name: build
       working-directory: ./afanasy/src/project.cmake
       run: ./build.sh
+    - name: package
+      working-directory: ./utilities/release
+      run: ./make_linuxpackages.sh
+    - uses: actions/upload-artifact@v3
+      with:
+        path: utilities/release/*.tar.gz

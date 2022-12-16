@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: install dependencies
       working-directory: ./utilities
-      run: apt-get update && ./install_depends_devel.sh
+      run: sudo apt-get update && sudo ./install_depends_devel.sh
     - name: Build
       working-directory: ./afanasy/src/project.cmake
       run: ./build.sh -j 2
@@ -27,7 +27,7 @@ jobs:
         allowUpdates: yes
         draft: yes
         makeLatest: yes
-        
+
   # build-debian11:
   #   runs-on: ubuntu-22.04
   #   container:

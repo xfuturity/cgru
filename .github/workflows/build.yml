@@ -23,9 +23,8 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: utilities/release/*.tar.gz
-        allowUpdates: yes
-        makeLatest: yes
-        replacesArtifacts: true
+        allowUpdates: true
+        makeLatest: true
 
   build-debian11:
     runs-on: ubuntu-22.04
@@ -46,9 +45,8 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: utilities/release/*.tar.gz
-        allowUpdates: yes
-        makeLatest: yes
-        replacesArtifacts: true
+        allowUpdates: true
+        makeLatest: true
 
   # build-centos7:
   #   runs-on: ubuntu-22.04

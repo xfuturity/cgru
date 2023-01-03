@@ -20,13 +20,15 @@ function debianArch(){
 	packages="$packages libpq-dev"
 	packages="$packages p7zip-full"
 	packages="$packages libzip-dev"
-	packages="$packages glibc-tools"
+	# seems to build without, TODO: remove
+	# packages="$packages glibc-tools"
+	packages="$packages rsync"
 
 	# Qt5:
 	packages="$packages qtbase5-dev"
 	packages="$packages qtmultimedia5-dev"
 
-	pkg_manager_cmd="apt-get install"
+	pkg_manager_cmd="apt-get install -y"
 	pkg_extension=""
 }
 
@@ -44,7 +46,7 @@ function redhatArch(){
 	packages="$packages libzip libzip-devel"
 	packages="$packages rpm-build"
 
-	pkg_manager_cmd="yum install"
+	pkg_manager_cmd="yum install -y"
 	pkg_extension=".$ARCHITECTURE"
 }
 
@@ -60,7 +62,7 @@ function fedoraArch(){
 	packages="$packages python3-devel"
 	packages="$packages OpenEXR-devel"
 
-	pkg_manager_cmd="dnf install"
+	pkg_manager_cmd="dnf install -y"
 	pkg_extension=""
 }
 
@@ -96,7 +98,7 @@ function altArch(){
 	packages="$packages openexr-devel"
 	packages="$packages rpm-build"
 
-	pkg_manager_cmd="apt-get install"
+	pkg_manager_cmd="apt-get install -y"
 	pkg_extension=""
 }
 

@@ -10,42 +10,46 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
-    - name: install dependencies
+    - name: Install Dependencies
       working-directory: ./utilities
       run: sudo apt-get update && sudo ./install_depends_devel.sh
     - name: Build
       working-directory: ./afanasy/src/project.cmake
-      run: ./build.sh -j 2
+      run: ./build.sh -j 4
     - name: Package
       working-directory: ./utilities/release
       run: ./make_linuxpackages.sh
     - name: Release
       uses: ncipollo/release-action@v1
-      # if: startsWith(github.ref, 'refs/tags/')
       with:
         artifacts: utilities/release/*.tar.gz
         allowUpdates: yes
         makeLatest: yes
         replacesArtifacts: true
 
-  # build-debian11:
-  #   runs-on: ubuntu-22.04
-  #   container:
-  #     image: debian:11
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: install dependencies
-  #     working-directory: ./utilities
-  #     run: export DEBIAN_FRONTEND=noninteractive && apt-get update && ./install_depends_devel.sh
-  #   - name: build
-  #     working-directory: ./afanasy/src/project.cmake
-  #     run: ./build.sh -j 2
-  #   - name: package
-  #     working-directory: ./utilities/release
-  #     run: ./make_linuxpackages.sh
-  # - uses: actions/upload-artifact@v3
-  #    with:
-  #      path: utilities/release/*.tar.gz
+  build-debian11:
+    runs-on: ubuntu-22.04
+    container:
+      image: debian:11
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Dependencies
+      working-directory: ./utilities
+      run: apt-get update && ./install_depends_devel.sh
+    - name: Build
+      working-directory: ./afanasy/src/project.cmake
+      run: ./build.sh -j 4
+    - name: Package
+      working-directory: ./utilities/release
+      run: ./make_linuxpackages.sh
+    - name: Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: utilities/release/*.tar.gz
+        allowUpdates: yes
+        makeLatest: yes
+        replacesArtifacts: true
+
   # build-centos7:
   #   runs-on: ubuntu-22.04
   #   container:

@@ -137,7 +137,7 @@ function Task(i_statusClass, i_task)
 	this.elShow.appendChild(this.elFlags);
 
 
-	if (c_CanEditTasks())
+	if (c_CanEditTask(this.obj))
 	{
 		this.elBtnEdit = document.createElement('button');
 		this.elBtnEdit.classList.add('button','edit','right');
@@ -488,9 +488,12 @@ Task.prototype.editProcess = function()
 	st_SetStatusFlags(this.obj, this.editFlags.getSelectedObjects());
 
 	// Artists:
-	let artists = this.editAritsts.getSelectedNames();
-	if (null !== artists )
-		this.obj.artists = artists;
+	if (c_CanAssignArtists())
+	{
+		let artists = this.editAritsts.getSelectedNames();
+		if (null !== artists)
+			this.obj.artists = artists;
+	}
 
 	// Annotation:
 	let annotation = this.elEditAnnotationContent.textContent;
@@ -509,11 +512,11 @@ Task.prototype.editProcess = function()
 	// We should calculate status progress
 	// if task progress is changed
 	// or if it is a new task
-	//this.save(this_is_a_new_task || (progress_prevous != this.obj.progress));return;
+	this.save(this_is_a_new_task || (progress_prevous != this.obj.progress));return;
 
 	let obj = {};
 	obj.path = this.statusClass.path;
-	let fields = ['name','atrists','flags','tags','progress','annotation'];
+	let fields = ['name','artists','flags','tags','progress','annotation'];
 	for (let f of fields)
 		obj[f] = this.obj[f];
 	if (nw_disabled)

@@ -31,6 +31,11 @@ function st_Init()
 function st_InitAuth()
 {
 	$('status_edit_btn').style.display = 'block';
+	if (c_CanEditShot())
+	{
+		$('status_tasks_btn_add').style.display = 'block';
+		$('status_tasks_btn_add_artist').style.display = 'block';
+	}
 }
 
 function st_Finish()
@@ -178,6 +183,8 @@ function Status(i_obj, i_args)
 			e.stopPropagation();
 			e.currentTarget.m_status.reloadFile(/*edit=*/true);
 		};
+		if (false == c_CanEditShot())
+			this.elEditBtn.style.display = 'none';
 	}
 
 	this.path = i_args.path;

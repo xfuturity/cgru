@@ -107,6 +107,7 @@ class events(service.service):
                 if m not in ["email", "notify-send"]:
                     self.taskInfo["command"] = "%s -jobid %s" % (m, objects['job']['id'])
 
+
         if len(email_events):
             cmd = cgruconfig.VARS['email_send_cmd']
             cmd += ' -V'  # Verbose mode

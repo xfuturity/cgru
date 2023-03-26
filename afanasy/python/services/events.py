@@ -102,7 +102,7 @@ class events(service.service):
             if 'notify-send' in methods:
                 self.taskInfo['command'] = "notify-send Afanasy 'Job " + task_info['job_name'].replace("'", "'\\''") + ": " + event + "'"
 
-            # execute any command and give job ID
+            # execute any command and give job ID of the source job
             for m in methods:
                 if m not in ["email", "notify-send"]:
                     self.taskInfo["command"] = "%s -jobid %s" % (m, objects['job']['id'])

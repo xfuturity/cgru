@@ -95,15 +95,13 @@ void SysTask::v_writeTaskOutput( const char * i_data, int i_size) const {}
 void SysTask::v_appendLog( const std::string & message)
 {
 	((SysBlock*)(m_block))->appendTaskLog( std::string("#") + af::itos( getNumber()) + ": " + message + ": "
-       + m_syscmd->user_name + ": \"" + m_syscmd->job_name + "\":\n"
-       + m_syscmd->command);
+       + m_syscmd->user_name + ": \"" + m_syscmd->job_name);
 }
 
 void SysTask::appendSysJobLog( const std::string & message)
 {
 	SysJob::appendJobLog( std::string("Task[") + af::itos( getNumber()) + "]: " + message + ": "
-	    + m_syscmd->user_name + ": \"" + m_syscmd->job_name + "\":\n"
-	    + m_syscmd->command);
+	    + m_syscmd->user_name + ": \"" + m_syscmd->job_name);
 }
 
 void SysTask::v_start( af::TaskExec * i_taskexec, RenderAf * i_render, MonitorContainer * i_monitoring)
